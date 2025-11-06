@@ -1,0 +1,79 @@
+
+g4ui when=4 "/vis/viewer/set/background 1 1 1"
+param disable=Decay   #Whether muons decay
+param stochastics=1
+physics QGSP_BIC disable=$disable
+param cell_end=4989.36269
+param zstep=50
+
+tube abs1 length=1277.36269 material=LH2 innerRadius=0.0 outerRadius=25.0 color=1,1,1,1
+place abs1 z=2894.68
+
+coil L0_C innerRadius=100.0 outerRadius=300.0 length=1000.0 nSheets=5.0 tolerance=1 maxZ=1000
+solenoid L0 coil=L0_C current=17.0 color=0,0,1,0.5
+place L0 z=0.00
+    
+coil MU1_C innerRadius=100.0 outerRadius=300.0 length=200.0 nSheets=5.0 tolerance=1 maxZ=1000
+solenoid MU1 coil=MU1_C current=34.07907333777548 color=0,0,1,0.5
+place MU1 z=1000.00
+    
+coil MU2_C innerRadius=100.0 outerRadius=300.0 length=200.0 nSheets=5.0 tolerance=1 maxZ=1000
+solenoid MU2 coil=MU2_C current=3.3219755405093148 color=0,0,1,0.5
+place MU2 z=1600.00
+    
+coil MU3_C innerRadius=100.0 outerRadius=300.0 length=200.0 nSheets=5.0 tolerance=1 maxZ=1000
+solenoid MU3 coil=MU3_C current=51.65297986535776 color=0,0,1,0.5
+place MU3 z=1900.00
+    
+coil H1corr1_U_C innerRadius=30.0 outerRadius=135.0 length=12.0 nSheets=3.0 tolerance=1 maxZ=1000
+solenoid H1corr1_U coil=H1corr1_U_C current=535.3 color=0,0,1,0.5
+place H1corr1_U z=2106.00
+    
+coil H1corr2_U_C innerRadius=30.0 outerRadius=125.0 length=12.0 nSheets=3.0 tolerance=1 maxZ=1000
+solenoid H1corr2_U coil=H1corr2_U_C current=535.3 color=0,0,1,0.5
+place H1corr2_U z=2118.00
+    
+coil H1corr3_U_C innerRadius=30.0 outerRadius=115.0 length=12.0 nSheets=3.0 tolerance=1 maxZ=1000
+solenoid H1corr3_U coil=H1corr3_U_C current=535.3 color=0,0,1,0.5
+place H1corr3_U z=2130.00
+    
+coil H1_C innerRadius=30.0 outerRadius=90.0 length=1517.36269 nSheets=5.0 tolerance=1 maxZ=1000
+solenoid H1 coil=H1_C current=535.3 color=0,0,1,0.5
+place H1 z=2894.68
+    
+coil H1corr1_D_C innerRadius=30.0 outerRadius=135.0 length=12.0 nSheets=5.0 tolerance=1 maxZ=1000
+solenoid H1corr1_D coil=H1corr1_D_C current=535.3 color=0,0,1,0.5
+place H1corr1_D z=3683.36
+    
+coil H1corr2_D_C innerRadius=30.0 outerRadius=125.0 length=12.0 nSheets=5.0 tolerance=1 maxZ=1000
+solenoid H1corr2_D coil=H1corr2_D_C current=535.3 color=0,0,1,0.5
+place H1corr2_D z=3671.36
+    
+coil H1corr3_D_C innerRadius=30.0 outerRadius=115.0 length=12.0 nSheets=5.0 tolerance=1 maxZ=1000
+solenoid H1corr3_D coil=H1corr3_D_C current=535.3 color=0,0,1,0.5
+place H1corr3_D z=3659.36
+    
+coil MD1_1_C innerRadius=100.0 outerRadius=300.0 length=200.0 nSheets=5.0 tolerance=1 maxZ=1000
+solenoid MD1_1 coil=MD1_1_C current=35.59682398054068 color=0,0,1,0.5
+place MD1_1 z=3889.36
+    
+coil MD1_2_C innerRadius=100.0 outerRadius=300.0 length=200.0 nSheets=5.0 tolerance=1 maxZ=1000
+solenoid MD1_2 coil=MD1_2_C current=-7.564106056579011 color=0,0,1,0.5
+place MD1_2 z=4439.36
+    
+coil MD1_3_C innerRadius=100.0 outerRadius=300.0 length=200.0 nSheets=5.0 tolerance=1 maxZ=1000
+solenoid MD1_3 coil=MD1_3_C current=-12.110464700076378 color=0,0,1,0.5
+place MD1_3 z=4989.36
+    
+pillbox RF0 innerLength=250.0 timeOffset=0 maxGradient=64.0 frequency=0.05 innerRadius=160.0 phaseAcc=0.0 win1Thick=0 win2Thick=0 color=1,0.5,0.5,1
+place RF0 z=4164.36
+    
+pillbox RF1 innerLength=250.0 timeOffset=0 maxGradient=64.0 frequency=0.05 innerRadius=160.0 phaseAcc=0.0 win1Thick=0 win2Thick=0 color=1,0.5,0.5,1
+place RF1 z=4714.36
+    
+zntuple output file=291025_benchmark_1000.txt format=FOR009.DAT zloop=0:$cell_end:$zstep referenceParticle=1
+beam ascii file=050625BeamInput_10000_4.04124T.txt beamZ=0.0 beamX=0.0 beamY=0.0 beamXp=0.0 beamYp=0.0 lastEvent=1000 # user provided file with particle data
+trackcuts keep=mu+
+
+reference particle=mu+ beamZ=0 referenceMomentum=200 beamX=0.0 beamY=0.0 beamXp=0.0 beamYp=0.0 noEfield=0 noEloss=0
+fieldntuple field_out format=ascii filename='Benchmark_g4bl_fieldmap' x=0 y=0 z=0,$cell_end,$zstep
