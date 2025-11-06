@@ -1,4 +1,9 @@
 ## Lattice Format
+Main file is Cooling_Lattice_Benchmark.ipynb for creation and benchmark of lattice format.
+Lattice file created at benchmarking.json
+Beam input is 050625BeamInput_10000_4.04124T
+Generated input g4bl file is G4BL_benchmark.g4bl
+G4BL output files are Benchmark_g4bl_fieldmap.txt and 291025_benchmark_1000.txt
 #### Data Formats
 Initialising a json format of the following structure:
 
